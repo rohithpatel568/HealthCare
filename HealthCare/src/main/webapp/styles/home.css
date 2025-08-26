@@ -1,0 +1,114 @@
+/* Reset styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Body styles */
+body {
+    background: linear-gradient(135deg, #e0f7fa, #e1bee7);
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Navbar styles */
+.navbar {
+    width: 100%;
+    padding: 15px 40px;
+    background-color: #ffffffcc;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    top: 0;
+    z-index: 10;
+}
+
+.nav-left h1 {
+    font-size: 1.8rem;
+    color: #2c3e50;
+}
+
+.nav-right .btn {
+    background-color: #3498db;
+    color: #fff;
+    padding: 8px 15px;
+    margin-left: 10px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.nav-right .btn:hover {
+    background-color: #2980b9;
+}
+
+/* Container for cards */
+.container {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-top: 120px;
+    padding: 20px;
+}
+
+/* Card styles */
+.card {
+    background: #fff;
+    width: 350px;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.15);
+    text-align: center;
+    transition: transform 0.3s ease-in-out;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+}
+
+/* Card heading */
+.card h2 {
+    color: #2c3e50;
+    margin-bottom: 10px;
+}
+
+/* Paragraph under heading */
+.card p {
+    color: #555;
+    margin-bottom: 15px;
+    font-size: 14px;
+}
+
+/* Dropdown styling */
+.dropdown {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-bottom: 15px;
+    font-size: 14px;
+}
+
+/* Button styling */
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #27ae60;
+    color: white;
+    border-radius: 5px;
+    border: none;
+    text-decoration: none;
+    font-size: 14px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn:hover {
+    background-color: #1e8449;
+}
