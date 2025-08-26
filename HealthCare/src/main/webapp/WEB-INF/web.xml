@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
+  <servlet>
+    <description></description>
+    <display-name>HealthCareDAO</display-name>
+    <servlet-name>HealthCareDAO</servlet-name>
+    <servlet-class>com.project.healthcare.HealthCareDAO</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>HealthCareDAO</servlet-name>
+    <url-pattern>/HealthCareDAO</url-pattern>
+  </servlet-mapping>
+  <display-name>HealthCare</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>index.xhtml</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+    <welcome-file>default.xhtml</welcome-file>
+  </welcome-file-list>
+  <servlet>
+    <description></description>
+    <display-name>Doctor</display-name>
+    <servlet-name>Doctor</servlet-name>
+    <servlet-class>com.project.healthcare.Doctor</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Doctor</servlet-name>
+    <url-pattern>/Doctor</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>DoctorController</display-name>
+    <servlet-name>DoctorController</servlet-name>
+    <servlet-class>com.project.healthcare.DoctorController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DoctorController</servlet-name>
+    <url-pattern>/DoctorController</url-pattern>
+  </servlet-mapping>
+</web-app>
