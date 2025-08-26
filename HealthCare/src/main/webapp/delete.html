@@ -29,11 +29,11 @@ body {
 				<h3>DELETE DOCTOR</h3>
 			</div>
 			<div class="card-body">
-				<form method="GET" action="DoctorController">
+				<form method="post" action="DoctorController?action=delete">
 					<input type="hidden" name="action" value="delete">
 					<div class="mb-3">
 						<label class="form-label">Doctor ID</label> <input type="number"
-							class="form-control" name="doctorId" required>
+							class="form-control" name="dId" required>
 					</div>
 					<button type="submit" class="btn btn-danger w-100">Delete
 						Doctor</button>

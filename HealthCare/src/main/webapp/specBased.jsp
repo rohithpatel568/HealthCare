@@ -14,25 +14,19 @@
 
         <div class="card-container">
             <%
-                Map<String, List<Doctor>> specMap = 
-                    (Map<String, List<Doctor>>) request.getAttribute("doctorsBySpec");
+                List<Doctor> specMap = 
+                    (List<Doctor>) request.getAttribute("doctors");
 
                 if (specMap != null && !specMap.isEmpty()) {
-                    for (Map.Entry<String, List<Doctor>> entry : specMap.entrySet()) {
-                        String specialization = entry.getKey();
-                        List<Doctor> topDocs = entry.getValue();
+                    for (Doctor doctor : specMap) {
+							String doctorString = doctor.toString();
             %>
                 <!-- One card for each specialization -->
                 <div class="card" style="flex: 1 1 100%; text-align:left;">
-                    <h3><%= specialization %></h3>
+                    <h3><% out.println(doctor.getSpec()); %></h3>
+                    <h3><% out.println("Doctor Details"); %></h3>
                     <ul>
-                        <% for (Doctor d : topDocs) { %>
-                            <li>
-                                <strong><%= d.getdName() %></strong> – 
-                                <%= d.getExp() %> years experience 
-                                (Location: <%= d.getLocation() %>)
-                            </li>
-                        <% } %>
+						<%= doctorString %>
                     </ul>
                 </div>
             <%

@@ -16,28 +16,28 @@
             <div class="card">
                 <h3>Add Doctor</h3>
                 <p>Add a new doctor to the system.</p>
-                <a href="addDoctor.jsp" class="btn">Add</a>
+                <a href="create.html" class="btn">Add</a>
             </div>
 
             <!-- Retrieve Doctors -->
             <div class="card">
                 <h3>View Doctors</h3>
                 <p>See the list of all registered doctors.</p>
-                <a href="listDoctors.jsp" class="btn btn-view">View</a>
+                <form action="DoctorController?action=retrieveAll" method="post"><input type="submit" class="btn btn-view" value="View"/></form>
             </div>
 
             <!-- Update Doctor -->
             <div class="card">
                 <h3>Update Doctor</h3>
                 <p>Modify existing doctor details.</p>
-                <a href="updateDoctor.jsp" class="btn btn-update">Update</a>
+                <a href="update.html" class="btn btn-update">Update</a>
             </div>
 
             <!-- Delete Doctor -->
             <div class="card">
                 <h3>Delete Doctor</h3>
                 <p>Remove a doctor from the system.</p>
-                <a href="deleteDoctor.jsp" class="btn btn-delete">Delete</a>
+                <a href="delete.html" class="btn btn-delete">Delete</a>
             </div>
         </div>
 

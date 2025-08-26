@@ -71,7 +71,7 @@ public class HealthCareDAO {
 	}
 
 	public void addDoctor(Doctor doctor) {
-		String sql = "INSERT INTO doctors (dId, dName, exp, spec, dob, loc) VALUES (?, ?, ?, ?, ?, ?)";
+		String sql = "INSERT INTO doctor (dId, dName, exp, spec, dob, loc) VALUES (?, ?, ?, ?, ?, ?)";
 		try (Connection con = getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
 			ps.setInt(1, doctor.getdId());
 			ps.setString(2, doctor.getdName());
@@ -86,7 +86,7 @@ public class HealthCareDAO {
 	}
 
 	public void updateDoctor(Doctor doctor) {
-		String sql = "UPDATE doctors SET dName=?, exp=?, spec=?, dob=?, loc=? WHERE dId=?";
+		String sql = "UPDATE doctor set dName=?, exp=?, spec=?, dob=?, loc=? WHERE dId=?";
 		try (Connection con = getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
 			ps.setString(1, doctor.getdName());
 			ps.setInt(2, doctor.getExp());
@@ -101,7 +101,7 @@ public class HealthCareDAO {
 	}
 
 	public void deleteDoctor(int dId) {
-		String sql = "DELETE FROM doctors WHERE dId=?";
+		String sql = "DELETE FROM doctor WHERE dId=?";
 		try (Connection con = getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
 			ps.setInt(1, dId);
 			ps.executeUpdate();
@@ -112,7 +112,7 @@ public class HealthCareDAO {
 
 	public List<Doctor> retrieveDoctors() {
 		List<Doctor> doctors = new ArrayList<>();
-		String sql = "SELECT * FROM doctors";
+		String sql = "SELECT * FROM doctor";
 		try (Connection con = getConnection();
 				Statement stmt = con.createStatement();
 				ResultSet rs = stmt.executeQuery(sql)) {
@@ -129,12 +129,24 @@ public class HealthCareDAO {
 
 	public List<Doctor> retrieveBasedOnSpec(List<String> specializations) throws Exception {
 		List<Doctor> doctors = new ArrayList<>();
-		if (specializations == null | specializations.isEmpty()) {
+
+		if (specializations == null || specializations.isEmpty()) {
 			return doctors;
+		}
+		if (specializations.get(0).equals("all")) {
+			Connection con = getConnection();
+			specializations.clear();
+			PreparedStatement ps = con.prepareStatement("select distinct spec from doctor");
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				String temp = rs.getString(1);
+				System.out.println(temp);
+				specializations.add(temp);
+			}
 		}
 
 		StringBuilder sql = new StringBuilder(
-				"SELECT * FROM ( SELECT *, ROW_NUMBER() OVER (PARTITION BY spec ORDER BY exp DESC) AS rn FROM doctors WHERE spec IN (");
+				"SELECT * FROM ( SELECT *, ROW_NUMBER() OVER (PARTITION BY spec ORDER BY exp DESC) AS rn FROM doctor WHERE spec IN (");
 
 		for (int i = 0; i < specializations.size(); i++) {
 			sql.append("?");
@@ -167,12 +179,24 @@ public class HealthCareDAO {
 
 	public List<Doctor> retrieveBasedOnLoc(List<String> locations) throws Exception {
 		List<Doctor> doctors = new ArrayList<>();
-		if (locations == null | locations.isEmpty()) {
+		if (locations == null || locations.isEmpty()) {
 			return doctors;
+		}
+		if (locations.get(0).equals("all")) {
+			Connection con = getConnection();
+			locations.clear();
+			PreparedStatement ps = con.prepareStatement("select distinct loc from doctor");
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				String temp = rs.getString(1);
+				System.out.println(temp);
+				locations.add(temp);
+			}
 		}
 
 		StringBuilder sql = new StringBuilder(
-				"SELECT * FROM ( SELECT *, ROW_NUMBER() OVER (PARTITION BY loc ORDER BY exp DESC) AS rn FROM doctors WHERE spec IN (");
+				"SELECT * FROM ( " + " SELECT *, ROW_NUMBER() OVER (PARTITION BY loc ORDER BY exp DESC) AS rn "
+						+ " FROM doctor WHERE loc IN (");
 
 		for (int i = 0; i < locations.size(); i++) {
 			sql.append("?");
@@ -181,6 +205,7 @@ public class HealthCareDAO {
 			}
 		}
 		sql.append(") ) t WHERE rn <= 2");
+
 		try (Connection con = getConnection(); PreparedStatement ps = con.prepareStatement(sql.toString())) {
 			for (int i = 0; i < locations.size(); i++) {
 				ps.setString(i + 1, locations.get(i));
@@ -189,7 +214,7 @@ public class HealthCareDAO {
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 				Doctor doc = new Doctor();
-				doc.setdId(rs.getInt("dId"));
+				doc.setdId(rs.getInt("dId")); // better: use column labels instead of indexes
 				doc.setdName(rs.getString("dName"));
 				doc.setExp(rs.getInt("exp"));
 				doc.setSpec(rs.getString("spec"));
@@ -197,7 +222,10 @@ public class HealthCareDAO {
 				doc.setLoc(rs.getString("loc"));
 				doctors.add(doc);
 			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
+		System.out.println(doctors);
 		return doctors;
 	}
 

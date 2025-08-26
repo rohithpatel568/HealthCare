@@ -2,15 +2,14 @@ package com.project.healthcare;
 
 import java.io.IOException;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 
-@WebServlet("/DoctorController")
 public class DoctorController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private HealthCareDAO dao;
@@ -22,39 +21,7 @@ public class DoctorController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String action = request.getParameter("action");
-
-		try {
-			if ("retrieve".equals(action)) {
-				// Normal retrieve (all doctors)
-				request.setAttribute("doctors", dao.retrieveDoctors());
-				RequestDispatcher rd = request.getRequestDispatcher("viewDoctors.jsp");
-				rd.forward(request, response);
-
-			} else if ("specBased".equals(action)) {
-				// Retrieve top 3 doctors per specialization
-				String[] specs = request.getParameterValues("spec");
-				if (specs != null) {
-					List<String> specializations = Arrays.asList(specs);
-					request.setAttribute("doctors", dao.retrieveBasedOnSpec(specializations));
-				}
-				RequestDispatcher rd = request.getRequestDispatcher("viewDoctors.jsp");
-				rd.forward(request, response);
-
-			} else if ("locBased".equals(action)) {
-				// Retrieve top 2 doctors per location
-				String[] locs = request.getParameterValues("loc");
-				if (locs != null) {
-					List<String> locations = Arrays.asList(locs);
-					request.setAttribute("doctors", dao.retrieveBasedOnLoc(locations));
-				}
-				RequestDispatcher rd = request.getRequestDispatcher("viewDoctors.jsp");
-				rd.forward(request, response);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			response.sendRedirect("Error.jsp?msg=" + e.getMessage());
-		}
+//		
 	}
 
 	@Override
@@ -102,7 +69,7 @@ public class DoctorController extends HttpServlet {
 				doctor.setSpec(request.getParameter("spec"));
 				doctor.setDob(Date.valueOf(request.getParameter("dob")));
 				doctor.setLoc(request.getParameter("loc"));
-
+				System.out.println(doctor.getdId());
 				dao.updateDoctor(doctor);
 				response.sendRedirect("admin.jsp?msg=Doctor+Updated");
 
@@ -110,6 +77,35 @@ public class DoctorController extends HttpServlet {
 				int dId = Integer.parseInt(request.getParameter("dId"));
 				dao.deleteDoctor(dId);
 				response.sendRedirect("admin.jsp?msg=Doctor+Deleted");
+			} else if ("retrieveAll".equals(action)) {
+				// Normal retrieve (all doctors)
+				request.setAttribute("doctors", dao.retrieveDoctors());
+				RequestDispatcher rd = request.getRequestDispatcher("listDoctors.jsp");
+				rd.forward(request, response);
+
+			} else if ("specBased".equals(action)) {
+				// Retrieve top 3 doctors per specialization
+				String[] specs = request.getParameterValues("specs");
+				for(String spec : specs) System.out.println(spec);
+				if (specs != null) {
+					List<String> specializations = new ArrayList<String>();
+					for(String spec : specs) specializations.add(spec);
+					request.setAttribute("doctors", dao.retrieveBasedOnSpec(specializations));
+				}
+				RequestDispatcher rd = request.getRequestDispatcher("specBased.jsp");
+				rd.forward(request, response);
+
+			} else if ("locBased".equals(action)) {
+				// Retrieve top 2 doctors per location
+				String[] locs = request.getParameterValues("location");
+				if (locs != null) {
+					List<String> locations = new ArrayList<>();
+					for(String loc : locs) locations.add(loc);
+					System.out.println(locations);
+					request.setAttribute("doctors", dao.retrieveBasedOnLoc(locations));
+				}
+				RequestDispatcher rd = request.getRequestDispatcher("locBased.jsp");
+				rd.forward(request, response);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

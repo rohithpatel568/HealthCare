@@ -9,7 +9,7 @@
 <body>
     <div class="login-container">
         <h1>Admin Login</h1>
-        <form action="admin.jsp" method="post">
+        <form action="DoctorController?action=loginAdmin" method="post">
             <div class="form-group">
                 <label for="adminUsername">Username</label>
                 <input type="text" id="adminUsername" name="username" placeholder="Enter Username" required>
