@@ -1,0 +1,134 @@
+@charset "UTF-8";
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background: #f0f8ff;
+}
+
+/* Container */
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+}
+
+.card {
+    background-color: #fff;
+    width: 280px;   /* fixed width */
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+    transition: 0.3s ease-in-out;
+    flex: 1 1 calc(50% - 40px);  /* 2 cards per row */
+}
+
+.container {
+    max-width: 1000px;
+    margin: 50px auto;
+    text-align: center;
+    padding: 20px;
+}
+
+.container h1 {
+    font-size: 32px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.container p {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 30px;
+}
+
+/* Cards */
+.card-container {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.card {
+    background-color: #fff;
+    width: 280px;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+    transition: 0.3s ease-in-out;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+/* Buttons */
+.btn {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 10px 25px;
+    border: none;
+    border-radius: 8px;
+    background-color: #4caf50;
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.btn:hover {
+    background-color: #388e3c;
+}
+
+.btn-update {
+    background-color: #2196f3;
+}
+
+.btn-update:hover {
+    background-color: #1976d2;
+}
+
+.btn-delete {
+    background-color: #f44336;
+}
+
+.btn-delete:hover {
+    background-color: #d32f2f;
+}
+
+.btn-view {
+    background-color: #9c27b0;
+}
+
+.btn-view:hover {
+    background-color: #7b1fa2;
+}
+
+.btn-logout {
+    margin-top: 40px;
+    background-color: #ff9800;
+}
+
+.btn-logout:hover {
+    background-color: #e68900;
+}
+
+/* Search Form */
+.search-form {
+    margin: 20px 0 40px 0;
+}
+
+.input-field {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    width: 250px;
+    margin-right: 10px;
+}
