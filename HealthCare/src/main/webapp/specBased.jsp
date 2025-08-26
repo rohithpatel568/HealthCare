@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="java.util.*, com.model.Doctor" %>
+<%@ page import="java.util.*, com.project.healthcare.Doctor" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,8 +28,8 @@
                     <ul>
                         <% for (Doctor d : topDocs) { %>
                             <li>
-                                <strong><%= d.getName() %></strong> – 
-                                <%= d.getExperience() %> years experience 
+                                <strong><%= d.getdName() %></strong> – 
+                                <%= d.getExp() %> years experience 
                                 (Location: <%= d.getLocation() %>)
                             </li>
                         <% } %>

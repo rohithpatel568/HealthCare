@@ -6,9 +6,9 @@ public class Doctor {
 	private int dId;
 	private String dName;
 	private int exp;
-	private String specialization;
+	private String spec;
 	private Date dob;
-	private String location;
+	private String loc;
 
 	public Doctor() {
 	}
@@ -23,34 +23,34 @@ public class Doctor {
 
 	@Override
 	public String toString() {
-		return "Doctor [dId=" + dId + ", dName=" + dName + ", exp=" + exp + ", specialization=" + specialization
-				+ ", dob=" + dob + ", location=" + location + "]";
+		return "Doctor [dId=" + dId + ", dName=" + dName + ", exp=" + exp + ", specialization=" + spec + ", dob=" + dob
+				+ ", location=" + loc + "]";
 	}
 
-	public Doctor(int dId, String dName, int exp, String specialization, Date dob, String location) {
+	public Doctor(int dId, String dName, int exp, String spec, Date dob, String loc) {
 		super();
 		this.dId = dId;
 		this.dName = dName;
 		this.exp = exp;
-		this.specialization = specialization;
+		this.spec = spec;
 		this.dob = dob;
-		this.location = location;
+		this.loc = loc;
 	}
 
 	public int getExp() {
 		return exp;
 	}
 
-	public String getSpecialization() {
-		return specialization;
+	public String getSpec() {
+		return spec;
 	}
 
 	public Date getDob() {
 		return dob;
 	}
 
-	public String getLocation() {
-		return location;
+	public String getLoc() {
+		return loc;
 	}
 
 	public void setdId(int dId) {
@@ -65,16 +65,16 @@ public class Doctor {
 		this.exp = exp;
 	}
 
-	public void setSpecialization(String specialization) {
-		this.specialization = specialization;
+	public void setSpec(String spec) {
+		this.spec = spec;
 	}
 
 	public void setDob(Date dob) {
 		this.dob = dob;
 	}
 
-	public void setLocation(String location) {
-		this.location = location;
+	public void setLoc(String loc) {
+		this.loc = loc;
 	}
 
 }
